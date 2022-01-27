@@ -1,7 +1,4 @@
-name: Help
-version: '${version}'
-main: com.semivanilla.help.Help
+name: HelpPlugin
+version: '${project.version}'
+main: com.semivanilla.helpplugin.HelpPlugin
 api-version: 1.18
-authors: [ Badbird5907, SemiVanillaMC ]
-description: Help plugin for SemiVanilla
-website: https://semivanilla.com
