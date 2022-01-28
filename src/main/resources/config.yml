@@ -1,4 +1,4 @@
-commands:
+commands: # commands that open the gui
   - help
   - discord
   - map
@@ -10,15 +10,15 @@ commands:
   - rules
   - helpmenu
 
-menu-name: 'Help Menu'
+menu-name: 'Help Menu' # name of the help menu
 
-items:
-  0:
-    material: 'EMERALD'
-    name: '&aStore'
-    lore:
+items: # items in the help menu
+  0: # first item etc...
+    material: 'EMERALD' # material of the item
+    name: '&aStore' # name of the item
+    lore: # lore of the item
       - '&eClick to open the store'
-    commands:
+    commands: # commands that are executed when the item is clicked
       - 'info store'
   1:
     material: 'MAP'
@@ -71,8 +71,8 @@ links:
   rules: 'https://semivanilla.com/rules'
 
 book:
-  help:
-    pages: 2
+  help: # help book
+    pages: 2 # number of pages in the help book (couldn't find a way to get this automatically easily through bukkit config api)
     0:
       - 'Help Book'
       - ''
@@ -84,27 +84,27 @@ book:
       - 'multiple pages'
       - 'abc'
       - 'def'
-  store:
+  store: # store book
     pages: 1
     0:
       - '<gold><bold>Click <underlined><click:open_url:%store-link%>here</click></underlined> to open the store!</bold></gold>'
-  map:
+  map: # map book
     pages: 1
     0:
       - '<gold><bold>Click <underlined><click:open_url:%map-link%>here</click></underlined> to open the map!</bold></gold>'
-  vote:
+  vote: # vote book
     pages: 1
     0:
       - '<gold><bold>Click <underlined><click:open_url:%vote-link%>here</click></underlined>!</bold></gold>'
-  website:
+  website: # website book
     pages: 1
     0:
       - '<gold><bold>Click <underlined><click:open_url:%website-link%>here</click></underlined> to open the website!</bold></gold>'
-  discord:
+  discord: # discord book
     pages: 1
     0:
       - '<gold><bold>Click <underlined><click:open_url:%discord-link%>here</click></underlined> to join the discord!</bold></gold>'
-  rules:
+  rules: # rules book
     pages: 1
     0:
       - '<gold><bold>Click <underlined><click:open_url:%rules-link%>here</click></underlined> to open the rules page!</bold></gold>'
