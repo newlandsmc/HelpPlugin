@@ -1,4 +1,4 @@
 name: HelpPlugin
 version: '${project.version}'
-main: com.semivanilla.helpplugin.HelpPlugin
-api-version: 1.18
+main: com.semivanilla.help.HelpPlugin
+api-version: 1.13

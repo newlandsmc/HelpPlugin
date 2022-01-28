@@ -1,0 +1,110 @@
+commands:
+  - help
+  - discord
+  - map
+  - website
+  - vote
+  - donate
+  - store
+  - info
+  - rules
+  - helpmenu
+
+menu-name: 'Help Menu'
+
+items:
+  0:
+    material: 'EMERALD'
+    name: '&aStore'
+    lore:
+      - '&eClick to open the store'
+    commands:
+      - 'info store'
+  1:
+    material: 'MAP'
+    name: '&aMap'
+    lore:
+      - '&eClick to open the map'
+    commands:
+      - 'info map'
+  2:
+    material: 'NETHER_STAR'
+    name: '&aVote'
+    lore:
+      - '&eClick to open the vote'
+    commands:
+      - 'info vote'
+  3:
+    material: 'CAMPFIRE'
+    name: '&aWebsite'
+    lore:
+      - '&eClick to open the website'
+    commands:
+      - 'info website'
+  4:
+    material: 'AMETHYST_SHARD'
+    name: '&aDiscord'
+    lore:
+      - '&eClick to join the discord'
+    commands:
+      - 'info discord'
+  5:
+    material: 'GLOBE_BANNER_PATTERN'
+    name: '&aRules'
+    lore:
+      - '&eClick to open the rules page'
+    commands:
+      - 'info rules'
+  6:
+    material: 'BOOK'
+    name: '&aHelp'
+    lore:
+      - '&eClick to open the help book'
+    commands:
+      - 'info help'
+links:
+  store: 'https://store.semivanilla.com/'
+  map: 'https://semivanilla.com/map'
+  vote: 'https://semivanilla.com/vote'
+  website: 'https://semivanilla.com/'
+  discord: 'https://discord.gg/3WzZ3x6wGp'
+  rules: 'https://semivanilla.com/rules'
+
+book:
+  help:
+    pages: 2
+    0:
+      - 'Help Book'
+      - ''
+      - ''
+      - 'Click <click:open_url:https://semivanilla.com>here</click> to go to the semivanilla website!'
+      - ''
+      - 'lorem ipsum dolt sit amet'
+    1:
+      - 'multiple pages'
+      - 'abc'
+      - 'def'
+  store:
+    pages: 1
+    0:
+      - '<gold><bold>Click <underlined><click:open_url:%store-link%>here</click></underlined> to open the store!</bold></gold>'
+  map:
+    pages: 1
+    0:
+      - '<gold><bold>Click <underlined><click:open_url:%map-link%>here</click></underlined> to open the map!</bold></gold>'
+  vote:
+    pages: 1
+    0:
+      - '<gold><bold>Click <underlined><click:open_url:%vote-link%>here</click></underlined>!</bold></gold>'
+  website:
+    pages: 1
+    0:
+      - '<gold><bold>Click <underlined><click:open_url:%website-link%>here</click></underlined> to open the website!</bold></gold>'
+  discord:
+    pages: 1
+    0:
+      - '<gold><bold>Click <underlined><click:open_url:%discord-link%>here</click></underlined> to join the discord!</bold></gold>'
+  rules:
+    pages: 1
+    0:
+      - '<gold><bold>Click <underlined><click:open_url:%rules-link%>here</click></underlined> to open the rules page!</bold></gold>'
