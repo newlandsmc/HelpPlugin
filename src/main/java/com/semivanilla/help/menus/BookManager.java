@@ -54,7 +54,7 @@ public class BookManager {
         }
         List<Component> components = new ArrayList<>();
         for (StringBuilder builder : builders) {
-            components.add(MiniMessage.markdown().parse(builder.toString()));
+            components.add(MiniMessage.get().parse(builder.toString()));
         }
         return meta.pages(new ArrayList<>(components));
         //return book;

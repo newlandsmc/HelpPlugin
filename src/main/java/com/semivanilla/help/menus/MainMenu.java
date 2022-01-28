@@ -9,6 +9,7 @@ import net.badbird5907.blib.menu.buttons.PlaceholderButton;
 import net.badbird5907.blib.menu.menu.Menu;
 import net.badbird5907.blib.util.CC;
 import net.badbird5907.blib.util.ItemBuilder;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemFlag;
@@ -49,6 +50,11 @@ public class MainMenu extends Menu {
         @Override
         public int getSlot() {
             return 0;
+        }
+
+        @Override
+        public ItemStack getItem(Player player) {
+            return new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).name(CC.AQUA).build();
         }
     }
 
