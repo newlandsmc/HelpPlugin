@@ -24,13 +24,15 @@ import java.util.stream.IntStream;
 public class MainMenu extends Menu {
     @Getter
     private static final MainMenu instance = new MainMenu();
+    private MainMenu() {}
+    int[] slots = {13,20,21,22,23,24,31};
 
     @Override
     public List<Button> getButtons(Player player) {
         List<Button> buttons = new ArrayList<>();
-        int i = 10;
+        int i = 0;
         for (SiteInfo siteInfo : ConfigManager.getInfo()) {
-            buttons.add(new InfoButton(siteInfo, i++));
+            buttons.add(new InfoButton(siteInfo, slots[i++]));
         }
         buttons.add(new Placeholders());
         return buttons;
@@ -44,7 +46,7 @@ public class MainMenu extends Menu {
     private class Placeholders extends PlaceholderButton {
         @Override
         public int[] getSlots() {
-            return genPlaceholderSpots(IntStream.range(0, 27), 10, 11, 12, 13, 14, 15, 16);
+            return genPlaceholderSpots(IntStream.range(0, 45), slots);
         }
 
         @Override
@@ -56,6 +58,11 @@ public class MainMenu extends Menu {
         public ItemStack getItem(Player player) {
             return new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).name(CC.AQUA).build();
         }
+    }
+
+    @Override
+    public int getInventorySize(List<Button> buttons) {
+        return 45;
     }
 
     @RequiredArgsConstructor
