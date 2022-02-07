@@ -57,34 +57,42 @@ public class CommandManager implements CommandExecutor {
             String action = args[0].toLowerCase();
             switch (action) {
                 case "help": {
+                    player.closeInventory();
                     player.openBook(BookManager.getHelp());
                     return true;
                 }
                 case "store": {
+                    player.closeInventory();
                     player.openBook(BookManager.getStore());
                     return true;
                 }
                 case "map": {
+                    player.closeInventory();
                     player.openBook(BookManager.getMap());
                     return true;
                 }
                 case "vote": {
+                    player.closeInventory();
                     player.openBook(BookManager.getVote());
                     return true;
                 }
                 case "website": {
+                    player.closeInventory();
                     player.openBook(BookManager.getWebsite());
                     return true;
                 }
                 case "discord": {
+                    player.closeInventory();
                     player.openBook(BookManager.getDiscord());
                     return true;
                 }
                 case "rules": {
+                    player.closeInventory();
                     player.openBook(BookManager.getRules());
                     return true;
                 }
                 default: {
+                    player.closeInventory();
                     MainMenu.getInstance().open(player);
                     return true;
                 }
