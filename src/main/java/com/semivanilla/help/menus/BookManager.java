@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookManager {
+    private static final MiniMessage miniMessage = MiniMessage.miniMessage();
+
     @Getter
     private static Book
             help,
@@ -54,7 +56,7 @@ public class BookManager {
         }
         List<Component> components = new ArrayList<>();
         for (StringBuilder builder : builders) {
-            components.add(MiniMessage.get().parse(builder.toString()));
+            components.add(miniMessage.deserialize(builder.toString()));
         }
         return meta.pages(new ArrayList<>(components));
         //return book;
