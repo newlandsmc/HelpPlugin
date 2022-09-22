@@ -25,7 +25,7 @@ public class MainMenu extends Menu {
     @Getter
     private static final MainMenu instance = new MainMenu();
     private MainMenu() {}
-    int[] slots = {13,20,21,22,23,24,31};
+    int[] slots = {4,11,12,13,14,15,22};
 
     @Override
     public List<Button> getButtons(Player player) {
@@ -46,7 +46,7 @@ public class MainMenu extends Menu {
     private class Placeholders extends PlaceholderButton {
         @Override
         public int[] getSlots() {
-            return genPlaceholderSpots(IntStream.range(0, 45), slots);
+            return genPlaceholderSpots(IntStream.range(0, 36), slots);
         }
 
         @Override
@@ -62,7 +62,7 @@ public class MainMenu extends Menu {
 
     @Override
     public int getInventorySize(List<Button> buttons) {
-        return 45;
+        return 36;
     }
 
     @RequiredArgsConstructor
