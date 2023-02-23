@@ -1,8 +1,7 @@
 package com.semivanilla.help.manager;
 
 import com.semivanilla.help.HelpPlugin;
-import com.semivanilla.help.menus.BookManager;
-import com.semivanilla.help.menus.MainMenu;
+import com.semivanilla.help.menus.Menus;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import net.badbird5907.blib.command.BukkitCommand;
@@ -49,11 +48,11 @@ public class CommandManager implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player) {
+            Player player = (Player) sender;
             if (args.length == 0) {
-                MainMenu.getInstance().open((Player) sender);
+                Menus.MAIN.open(player);
                 return true;
             }
-            Player player = (Player) sender;
             String action = args[0].toLowerCase();
             switch (action) {
                 case "help": {
@@ -93,7 +92,7 @@ public class CommandManager implements CommandExecutor {
                 }
                 default: {
                     player.closeInventory();
-                    MainMenu.getInstance().open(player);
+                    MenuManager.getInstance().open(Menus.MAIN, player);
                     return true;
                 }
             }

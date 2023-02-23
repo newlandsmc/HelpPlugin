@@ -1,4 +1,4 @@
-package com.semivanilla.help.menus;
+package com.semivanilla.help.manager;
 
 import com.semivanilla.help.manager.ConfigManager;
 import lombok.Getter;
@@ -36,6 +36,27 @@ public class BookManager {
         website = createBook("Website");
         discord = createBook("Discord");
         rules = createBook("Rules");
+    }
+
+    public static Book getBookByName(String name) {
+        switch (name.toLowerCase()) {
+            case "help":
+                return help;
+            case "store":
+                return store;
+            case "map":
+                return map;
+            case "vote":
+                return vote;
+            case "website":
+                return website;
+            case "discord":
+                return discord;
+            case "rules":
+                return rules;
+            default:
+                return null;
+        }
     }
 
     @SneakyThrows
