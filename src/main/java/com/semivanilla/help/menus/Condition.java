@@ -17,6 +17,15 @@ public abstract class Condition {
         }
     }
 
+    public class GamemodeCondition extends Condition {
+        private String mode;
+
+        @Override
+        public boolean conditionIsMet(Player player, Object args) {
+            return player.getGameMode().name().equalsIgnoreCase(mode);
+        }
+    }
+
 
     public class AndCondition extends Condition {
         private Condition a, b;
@@ -60,6 +69,8 @@ public abstract class Condition {
                     return context.deserialize(jsonObject, OrCondition.class);
                 case "not":
                     return context.deserialize(jsonObject, NotCondition.class);
+                case "gamemode":
+                    return context.deserialize(jsonObject, GamemodeCondition.class);
             }
             return null;
         }

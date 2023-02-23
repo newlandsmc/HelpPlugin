@@ -9,6 +9,9 @@ import dev.triumphteam.gui.guis.GuiItem;
 import lombok.Data;
 import net.badbird5907.blib.util.CC;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -22,13 +25,16 @@ public class MenuConfig {
     private int rows;
     private List<MenuItemConfig> items;
 
+    private FillConfig fill;
+
     public Gui createGui() {
         return Gui.gui()
-                .title(Legacy.SERIALIZER.deserialize(title))
+                .title(MiniMessage.miniMessage().deserialize(title))
                 .rows(rows)
                 .disableAllInteractions()
                 .create();
     }
+    private static final GuiItem defaultFill = ItemBuilder.from(Material.BLACK_STAINED_GLASS_PANE).name(Component.space().color(NamedTextColor.RED)).lore().asGuiItem();
 
     public void populate(Gui gui, Player player) {
         //System.out.println("Items: " + items.size());
@@ -36,6 +42,9 @@ public class MenuConfig {
             //System.out.println(" - Item: " + item.name);
             GuiItem guiItem = item.asGuiItem(player, gui, this);
             gui.setItem(item.getSlot(), guiItem);
+        }
+        if (fill != null && fill.isEnabled()) {
+            gui.getFiller().fill(fill.isUseDefault() ? defaultFill : fill.getItem().asGuiItem(player, gui, this));
         }
     }
 
@@ -51,6 +60,12 @@ public class MenuConfig {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Data
+    public static class FillConfig {
+        private MenuItemConfig item;
+        boolean enabled, useDefault;
     }
 
     @Data
@@ -129,10 +144,10 @@ public class MenuConfig {
 
                 List<Component> loreComponents = new ArrayList<>();
                 for (String loreLine : lore) {
-                    loreComponents.add(Legacy.SERIALIZER.deserialize(CC.translate(loreLine)));
+                    loreComponents.add(MiniMessage.miniMessage().deserialize(loreLine));
                 }
                 return ItemBuilder.from(getMaterial())
-                        .setName(name)
+                        .name(MiniMessage.miniMessage().deserialize(name))
                         .lore(loreComponents)
                         .asGuiItem(event -> {
                             for (Action action : actions) {

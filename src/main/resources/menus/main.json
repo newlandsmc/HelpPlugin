@@ -1,0 +1,65 @@
+{
+  "title": "Help Menu",
+  "rows": 7,
+  "fill": {
+    "enabled": true,
+    "useDefault": true
+  },
+  "items": [
+    {
+      "slot": 1,
+      "material": "DIRT",
+      "name": "Plain old item",
+      "lore": [
+        "<green>Has only actions, no conditional items"
+      ],
+      "actions": [
+        {
+          "type": "command",
+          "command": "say Hello World!"
+        },
+        {
+          "type": "book",
+          "book": "discord"
+        }
+      ]
+    },
+    {
+      "slot": 2,
+      "material": "DIAMOND",
+      "name": "Test",
+      "lore": [
+        "<red>No Permission"
+      ],
+      "conditionalItems": [
+        {
+          "item": {
+            "lore": [
+              "<green>Has permission and not in gamemode s!"
+            ]
+          },
+          "condition": {
+            "type": "and",
+            "a": {
+              "type": "permission",
+              "permission": "a.b.c"
+            },
+            "b": {
+              "type": "not",
+              "condition": {
+                "type": "gamemode",
+                "kit": "survival"
+              }
+            }
+          }
+        }
+      ],
+      "actions": [
+        {
+          "type": "command",
+          "command": "say Hello World!"
+        }
+      ]
+    }
+  ]
+}
