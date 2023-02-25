@@ -115,6 +115,9 @@ public class MenuConfig {
             }
             return menuItemConfig;
         }
+        public static Component cleanItalics(Component in) {
+            return Component.empty().decoration(TextDecoration.ITALIC, false).append(in);
+        }
 
         public Material getMaterial() {
             String material = this.material == null ? (parent != null ? parent.material : null) : this.material;
@@ -144,10 +147,10 @@ public class MenuConfig {
 
                 List<Component> loreComponents = new ArrayList<>();
                 for (String loreLine : lore) {
-                    loreComponents.add(MiniMessage.miniMessage().deserialize(loreLine));
+                    loreComponents.add(cleanItalics(MiniMessage.miniMessage().deserialize(loreLine)));
                 }
                 return ItemBuilder.from(getMaterial())
-                        .name(MiniMessage.miniMessage().deserialize(name))
+                        .name(cleanItalics(MiniMessage.miniMessage().deserialize(name)))
                         .lore(loreComponents)
                         .asGuiItem(event -> {
                             for (Action action : actions) {
