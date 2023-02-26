@@ -12,56 +12,6 @@ commands: # commands that open the gui
 
 menu-name: 'Help Menu' # name of the help menu
 
-items: # items in the help menu
-  0: # first item etc...
-    material: 'EMERALD' # material of the item
-    name: '&aStore' # name of the item
-    lore: # lore of the item
-      - '&eClick to open the store'
-    commands: # commands that are executed when the item is clicked
-      - 'info store'
-  1:
-    material: 'MAP'
-    name: '&aMap'
-    lore:
-      - '&eClick to open the map'
-    commands:
-      - 'info map'
-  2:
-    material: 'NETHER_STAR'
-    name: '&aVote'
-    lore:
-      - '&eClick to open the vote'
-    commands:
-      - 'info vote'
-  3:
-    material: 'ENCHANTED_BOOK'
-    name: '&aHelp'
-    lore:
-      - '&eClick to open the help book'
-    commands:
-      - 'info help'
-  4:
-    material: 'AMETHYST_SHARD'
-    name: '&aDiscord'
-    lore:
-      - '&eClick to join the discord'
-    commands:
-      - 'info discord'
-  5:
-    material: 'GLOBE_BANNER_PATTERN'
-    name: '&aRules'
-    lore:
-      - '&eClick to open the rules page'
-    commands:
-      - 'info rules'
-  6:
-    material: 'CAMPFIRE'
-    name: '&aWebsite'
-    lore:
-      - '&eClick to open the website'
-    commands:
-      - 'info website'
 links:
   store: 'https://store.semivanilla.com/'
   map: 'https://semivanilla.com/map'
