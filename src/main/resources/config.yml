@@ -22,7 +22,6 @@ links:
 
 book:
   help: # help book
-    pages: 2 # number of pages in the help book (couldn't find a way to get this automatically easily through bukkit config api)
     0:
       - 'Help Book'
       - ''
@@ -35,26 +34,20 @@ book:
       - 'abc'
       - 'def'
   store: # store book
-    pages: 1
     0:
       - '<gold><bold>Click <underlined><click:open_url:%store-link%>here</click></underlined> to open the store!</bold></gold>'
   map: # map book
-    pages: 1
     0:
       - '<gold><bold>Click <underlined><click:open_url:%map-link%>here</click></underlined> to open the map!</bold></gold>'
   vote: # vote book
-    pages: 1
     0:
       - '<gold><bold>Click <underlined><click:open_url:%vote-link%>here</click></underlined>!</bold></gold>'
   website: # website book
-    pages: 1
     0:
       - '<gold><bold>Click <underlined><click:open_url:%website-link%>here</click></underlined> to open the website!</bold></gold>'
   discord: # discord book
-    pages: 1
     0:
       - '<gold><bold>Click <underlined><click:open_url:%discord-link%>here</click></underlined> to join the discord!</bold></gold>'
   rules: # rules book
-    pages: 1
     0:
       - '<gold><bold>Click <underlined><click:open_url:%rules-link%>here</click></underlined> to open the rules page!</bold></gold>'

@@ -2,6 +2,7 @@ package com.semivanilla.help.manager;
 
 import com.semivanilla.help.HelpPlugin;
 import lombok.Getter;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;
@@ -61,10 +62,26 @@ public class ConfigManager {
 
     public List<List<String>> getBook(String name) {
         List<List<String>> a = new ArrayList<>();
+        /*
         int pages = getConfig().getInt("book." + name + ".pages");
         for (int i = 0; i < pages; i++) {
             List<String> list = new ArrayList<>();
             for (String s : getConfig().getStringList("book." + name + "." + i)) {
+                list.add(s
+                        .replace("%store-link%", storeLink)
+                        .replace("%map-link%", mapLink)
+                        .replace("%vote-link%", voteLink)
+                        .replace("%website-link%", websiteLink)
+                        .replace("%discord-link%", discordLink)
+                        .replace("%rules-link%", rulesLink));
+            }
+            a.add(list);
+        }
+         */
+        ConfigurationSection section = getConfig().getConfigurationSection("book." + name);
+        for (String key : section.getKeys(false)) {
+            List<String> list = new ArrayList<>();
+            for (String s : getConfig().getStringList("book." + name + "." + key)) {
                 list.add(s
                         .replace("%store-link%", storeLink)
                         .replace("%map-link%", mapLink)
