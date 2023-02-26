@@ -3,11 +3,9 @@ package com.semivanilla.help.menus;
 import com.google.gson.*;
 import com.semivanilla.help.HelpPlugin;
 import dev.triumphteam.gui.builder.item.ItemBuilder;
-import dev.triumphteam.gui.components.util.Legacy;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import lombok.Data;
-import net.badbird5907.blib.util.CC;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -34,6 +32,7 @@ public class MenuConfig {
                 .disableAllInteractions()
                 .create();
     }
+
     private static final GuiItem defaultFill = ItemBuilder.from(Material.BLACK_STAINED_GLASS_PANE).name(Component.space().color(NamedTextColor.RED)).lore().asGuiItem();
 
     public void populate(Gui gui, Player player) {
@@ -115,6 +114,7 @@ public class MenuConfig {
             }
             return menuItemConfig;
         }
+
         public static Component cleanItalics(Component in) {
             return Component.empty().decoration(TextDecoration.ITALIC, false).append(in);
         }
@@ -153,12 +153,16 @@ public class MenuConfig {
                         .name(cleanItalics(MiniMessage.miniMessage().deserialize(name)))
                         .lore(loreComponents)
                         .asGuiItem(event -> {
+                            boolean reOpen = true;
                             for (Action action : actions) {
-                                action.run(((Player) event.getWhoClicked()));
+                                if (!action.run(((Player) event.getWhoClicked()))) {
+                                    reOpen = false;
+                                }
                             }
                             //gui.setItem(event.getSlot(), asGuiItem(player,gui));
                             //gui.update();
-                            config.open(player); // TODO: reopening the gui causes flickering, figure out how to update the item.
+                            if (reOpen)
+                                config.open(player); // TODO: reopening the gui causes flickering, figure out how to update the item.
                         });
             } catch (Exception e) {
                 e.printStackTrace();

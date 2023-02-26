@@ -9,28 +9,38 @@ import org.bukkit.entity.Player;
 import java.lang.reflect.Type;
 
 public abstract class Action {
-    public abstract void run(Player player);
+    public abstract boolean run(Player player);
 
     public static class CommandAction extends Action {
         private String command;
 
         @Override
-        public void run(Player player) {
+        public boolean run(Player player) {
             player.performCommand(command);
+            return true;
         }
     }
     public static class BookAction extends Action {
         private String book;
 
         @Override
-        public void run(Player player) {
+        public boolean run(Player player) {
             player.closeInventory();
             Book book = BookManager.getBookByName(this.book);
             if (book == null) {
                 player.sendMessage(ChatColor.RED + "Could not find book \"" + this.book + "\"!");
-                return;
+                return true;
             }
-            player.openBook(book);
+            // System.out.println("Opening book " + this.book + " | " + book.examinableName());
+            try {
+                player.closeInventory();
+                player.openBook(book);
+                return false;
+            } catch (Exception e) {
+                player.sendMessage(ChatColor.RED + "Could not open book \"" + this.book + "\"!");
+                e.printStackTrace();
+                throw e;
+            }
         }
     }
 

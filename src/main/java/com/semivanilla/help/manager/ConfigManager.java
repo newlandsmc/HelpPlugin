@@ -80,6 +80,8 @@ public class ConfigManager {
          */
         ConfigurationSection section = getConfig().getConfigurationSection("book." + name);
         for (String key : section.getKeys(false)) {
+            // System.out.println(key);
+            if (section.isString(key) || section.isInt(key)) continue;
             List<String> list = new ArrayList<>();
             for (String s : getConfig().getStringList("book." + name + "." + key)) {
                 list.add(s
