@@ -8,10 +8,12 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,14 +61,19 @@ public class BookManager {
         }
     }
 
-    @SneakyThrows
     public static Book createBook(String name) {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
         meta.setTitle("Help " + name);
         meta.setAuthor("SemiVanillaMC");
         List<List<String>> list;
-        list = (List<List<String>>) ConfigManager.class.getDeclaredMethod("get" + name).invoke(ConfigManager.class);
+        try {
+            list = (List<List<String>>) ConfigManager.class.getDeclaredMethod("get" + name).invoke(ConfigManager.class);
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            Bukkit.getLogger().severe("Error while creating book " + name);
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
         List<StringBuilder> builders = new ArrayList<>();
         for (List<String> strings : list) { //every page
             StringBuilder builder = new StringBuilder();

@@ -1,11 +1,7 @@
 package com.semivanilla.help.manager;
 
 import com.semivanilla.help.HelpPlugin;
-import com.semivanilla.help.object.SiteInfo;
 import lombok.Getter;
-import net.badbird5907.blib.util.CC;
-import net.kyori.adventure.text.Component;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;
@@ -24,8 +20,6 @@ public class ConfigManager {
             websiteLink,
             discordLink,
             rulesLink;
-    @Getter
-    private static List<SiteInfo> info = new ArrayList<>();
 
     @Getter
     private static List<List<String>>
@@ -55,13 +49,6 @@ public class ConfigManager {
         rulesLink = getConfig().getString("links.rules");
 
         commands = getConfig().getStringList("commands").toArray(new String[0]);
-        for (int i = 0; i < 7; i++) {
-            String mat = getConfig().getString("items." + i + ".material");
-            String name = getConfig().getString("items." + i + ".name");
-            List<String> lore = getConfig().getStringList("items." + i + ".lore");
-            List<String> commands = getConfig().getStringList("items." + i + ".commands");
-            info.add(new SiteInfo(name, Material.valueOf(mat.toUpperCase()), lore, commands));
-        }
         menuName = getConfig().getString("menu-name");
         help = getBook("help");
         store = getBook("store");
