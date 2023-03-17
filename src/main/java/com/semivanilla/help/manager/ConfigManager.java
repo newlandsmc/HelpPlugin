@@ -7,12 +7,14 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 public class ConfigManager {
     @Getter
-    private static String[] commands;
+    private static String[] guiCommands;
     @Getter
     private static String menuName,
             storeLink,
@@ -32,6 +34,9 @@ public class ConfigManager {
             discord = new ArrayList<>(),
             rules = new ArrayList<>();
 
+    @Getter // Command, Book Name
+    private static Map<String, String> commandBookMap = new HashMap<>();
+
 
     public void init() {
         HelpPlugin plugin = HelpPlugin.getInstance();
@@ -49,7 +54,13 @@ public class ConfigManager {
         discordLink = getConfig().getString("links.discord");
         rulesLink = getConfig().getString("links.rules");
 
-        commands = getConfig().getStringList("commands").toArray(new String[0]);
+        guiCommands = getConfig().getStringList("commands.gui").toArray(new String[0]);
+        ConfigurationSection booksSection = getConfig().getConfigurationSection("commands.books");
+        for (String key : booksSection.getKeys(false)) {
+            for (String command : booksSection.getStringList(key)) {
+                commandBookMap.put(command, key);
+            }
+        }
         menuName = getConfig().getString("menu-name");
         help = getBook("help");
         store = getBook("store");

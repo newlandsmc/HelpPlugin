@@ -5,6 +5,8 @@ import com.semivanilla.help.menus.Menus;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import net.badbird5907.blib.command.BukkitCommand;
+import net.badbird5907.blib.util.CC;
+import net.kyori.adventure.inventory.Book;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -49,6 +51,19 @@ public class CommandManager implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
+            if (!label.isEmpty()) {
+                if (ConfigManager.getCommandBookMap().containsKey(label)) {
+                    player.closeInventory();
+                    Book book = BookManager.getBookByName(ConfigManager.getCommandBookMap().get(label));
+                    if (book == null) {
+                        player.sendMessage(CC.RED + "Book not found!");
+                        return true;
+                    }
+                    player.closeInventory();
+                    player.openBook(book);
+                    return true;
+                }
+            }
             if (args.length == 0) {
                 Menus.MAIN.open(player);
                 return true;

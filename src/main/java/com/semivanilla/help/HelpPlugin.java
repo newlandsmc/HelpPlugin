@@ -46,9 +46,10 @@ public final class HelpPlugin extends JavaPlugin {
             getDataFolder().mkdir();
         configManager = new ConfigManager();
         configManager.init();
-        for (String command : ConfigManager.getCommands()) {
+        for (String command : ConfigManager.getGuiCommands()) {
             CommandManager.getInstance().registerCommand(command);
         }
+        ConfigManager.getCommandBookMap().forEach((command, book) -> CommandManager.getInstance().registerCommand(command));
         BookManager.init();
         MenuManager.getInstance().init();
     }

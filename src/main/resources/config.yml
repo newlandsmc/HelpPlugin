@@ -1,14 +1,26 @@
 commands: # commands that open the gui
-  - help
-  - discord
-  - map
-  - website
-  - vote
-  - donate
-  - store
-  - info
-  - rules
-  - helpmenu
+  gui:
+    - help
+    - helpmenu
+    - info
+  books:
+    help:
+      - helpbook
+    store:
+      - store
+      - donate
+    map:
+      - map
+      - maps
+    vote:
+      - vote
+    website:
+      - website
+      - site
+      - web
+    discord:
+      - discord
+
 
 menu-name: 'Help Menu' # name of the help menu
 
