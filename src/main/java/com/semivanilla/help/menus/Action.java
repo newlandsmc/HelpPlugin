@@ -2,11 +2,14 @@ package com.semivanilla.help.menus;
 
 import com.google.gson.*;
 import com.semivanilla.help.manager.BookManager;
+import com.semivanilla.help.manager.ConfigManager;
 import net.kyori.adventure.inventory.Book;
+import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.Type;
+import java.util.List;
 
 public abstract class Action {
     public abstract boolean run(Player player);
@@ -34,13 +37,30 @@ public abstract class Action {
             // System.out.println("Opening book " + this.book + " | " + book.examinableName());
             try {
                 player.closeInventory();
-                player.openBook(book);
+                // player.openBook(book);
+                BookManager.giveBook(book, player);
                 return false;
             } catch (Exception e) {
-                player.sendMessage(ChatColor.RED + "Could not open book \"" + this.book + "\"!");
+                player.sendMessage(ChatColor.RED + "Could not give book \"" + this.book + "\"!");
                 e.printStackTrace();
                 throw e;
             }
+        }
+    }
+    public static class MessageAction extends Action {
+        private String key;
+
+        @Override
+        public boolean run(Player player) {
+            List<Component> messages = ConfigManager.getComponentsByName(key);
+            if (messages == null) {
+                player.sendMessage(ChatColor.RED + "Could not find message \"" + key + "\"!");
+                return true;
+            }
+            for (Component message : messages) {
+                player.sendMessage(message);
+            }
+            return true;
         }
     }
 
@@ -55,6 +75,8 @@ public abstract class Action {
                     return context.deserialize(jsonObject, CommandAction.class);
                 case "book":
                     return context.deserialize(jsonObject, BookAction.class);
+                case "message":
+                    return context.deserialize(jsonObject, MessageAction.class);
             }
             return null;
         }

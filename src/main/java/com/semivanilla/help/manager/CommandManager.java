@@ -72,9 +72,11 @@ public class CommandManager implements CommandExecutor {
             switch (action) {
                 case "help": {
                     player.closeInventory();
-                    player.openBook(BookManager.getHelp());
+                    //player.openBook(BookManager.getHelp());
+                    BookManager.giveBook(BookManager.getHelp(), player);
                     return true;
                 }
+                /*
                 case "store": {
                     player.closeInventory();
                     player.openBook(BookManager.getStore());
@@ -105,6 +107,7 @@ public class CommandManager implements CommandExecutor {
                     player.openBook(BookManager.getRules());
                     return true;
                 }
+                 */
                 default: {
                     player.closeInventory();
                     MenuManager.getInstance().open(Menus.MAIN, player);

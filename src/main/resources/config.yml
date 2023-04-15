@@ -23,6 +23,7 @@ commands: # commands that open the gui
 
 
 menu-name: 'Help Menu' # name of the help menu
+book-author: 'SemiVanilla' # author of the books
 
 links:
   store: 'https://store.semivanilla.com/'
@@ -31,7 +32,6 @@ links:
   website: 'https://semivanilla.com/'
   discord: 'https://discord.gg/3WzZ3x6wGp'
   rules: 'https://semivanilla.com/rules'
-
 book:
   help: # help book
     0:

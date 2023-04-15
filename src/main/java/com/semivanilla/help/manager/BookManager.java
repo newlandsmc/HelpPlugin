@@ -10,6 +10,7 @@ import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 
@@ -18,32 +19,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookManager {
+    @Getter
     private static final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     @Getter
-    private static Book
-            help,
+    private static Book help;
+    /*
             store,
             map,
             vote,
             website,
             discord,
             rules;
+     */
 
     public static void init() {
         help = createBook("Help");
+        /*
         store = createBook("Store");
         map = createBook("Map");
         vote = createBook("Vote");
         website = createBook("Website");
         discord = createBook("Discord");
         rules = createBook("Rules");
+         */
     }
 
     public static Book getBookByName(String name) {
         switch (name.toLowerCase()) {
             case "help":
                 return help;
+                /*
             case "store":
                 return store;
             case "map":
@@ -56,6 +62,7 @@ public class BookManager {
                 return discord;
             case "rules":
                 return rules;
+                 */
             default:
                 return null;
         }
@@ -65,7 +72,7 @@ public class BookManager {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
         meta.setTitle("Help " + name);
-        meta.setAuthor("SemiVanillaMC");
+        meta.setAuthor(ConfigManager.getBookAuthor());
         List<List<String>> list;
         try {
             list = (List<List<String>>) ConfigManager.class.getDeclaredMethod("get" + name).invoke(ConfigManager.class);
@@ -142,5 +149,15 @@ public class BookManager {
         }
 
         return textComponents;
+    }
+
+    public static void giveBook(Book book, Player player) {
+        ItemStack itemStack = new ItemStack(Material.WRITTEN_BOOK);
+        BookMeta meta = (BookMeta) itemStack.getItemMeta();
+        meta.title(book.title());
+        meta.author(book.author());
+        meta.pages(book.pages());
+        itemStack.setItemMeta(meta);
+        player.getInventory().addItem(itemStack);
     }
 }

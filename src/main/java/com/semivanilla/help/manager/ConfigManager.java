@@ -2,6 +2,7 @@ package com.semivanilla.help.manager;
 
 import com.semivanilla.help.HelpPlugin;
 import lombok.Getter;
+import net.kyori.adventure.text.Component;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -26,8 +27,18 @@ public class ConfigManager {
 
     @Getter
     private static List<List<String>>
-            help = new ArrayList<>(),
+            help = new ArrayList<>();
+    /*
             store = new ArrayList<>(),
+            map = new ArrayList<>(),
+            vote = new ArrayList<>(),
+            website = new ArrayList<>(),
+            discord = new ArrayList<>(),
+            rules = new ArrayList<>();
+     */
+
+    @Getter
+    private static List<Component> store = new ArrayList<>(),
             map = new ArrayList<>(),
             vote = new ArrayList<>(),
             website = new ArrayList<>(),
@@ -36,6 +47,8 @@ public class ConfigManager {
 
     @Getter // Command, Book Name
     private static Map<String, String> commandBookMap = new HashMap<>();
+    @Getter
+    private static String bookAuthor;
 
 
     public void init() {
@@ -63,12 +76,38 @@ public class ConfigManager {
         }
         menuName = getConfig().getString("menu-name");
         help = getBook("help");
+        bookAuthor = getConfig().getString("book-author");
+        /*
         store = getBook("store");
         map = getBook("map");
         vote = getBook("vote");
         website = getBook("website");
         discord = getBook("discord");
         rules = getBook("rules");
+         */
+        store = getComponentList("store");
+        map = getComponentList("map");
+        vote = getComponentList("vote");
+        website = getComponentList("website");
+        discord = getComponentList("discord");
+        rules = getComponentList("rules");
+    }
+    public List<Component> getComponentList(String name) {
+        List<Component> list = new ArrayList<>();
+        ConfigurationSection section = getConfig().getConfigurationSection("book." + name);
+        for (String key : section.getKeys(false)) {
+            List<String> stringList = section.getStringList(key);
+            for (String s : stringList) {
+                list.add(BookManager.getMiniMessage().deserialize(s
+                        .replace("%store-link%", storeLink)
+                        .replace("%map-link%", mapLink)
+                        .replace("%vote-link%", voteLink)
+                        .replace("%website-link%", websiteLink)
+                        .replace("%discord-link%", discordLink)
+                        .replace("%rules-link%", rulesLink)));
+            }
+        }
+        return list;
     }
 
     public List<List<String>> getBook(String name) {
@@ -107,7 +146,24 @@ public class ConfigManager {
         }
         return a;
     }
-
+    public static List<Component> getComponentsByName(String name) {
+        switch (name.toLowerCase()) {
+            case "store":
+                return store;
+            case "map":
+                return map;
+            case "vote":
+                return vote;
+            case "website":
+                return website;
+            case "discord":
+                return discord;
+            case "rules":
+                return rules;
+            default:
+                return null;
+        }
+    }
     public FileConfiguration getConfig() {
         return HelpPlugin.getInstance().getConfig();
     }
