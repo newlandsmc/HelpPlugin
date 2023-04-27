@@ -21,6 +21,8 @@ commands: # commands that open the gui
     discord:
       - discord
 
+messages:
+  book-given: '<green>Added a book to your inventory!'
 
 menu-name: 'Help Menu' # name of the help menu
 book-author: 'SemiVanilla' # author of the books

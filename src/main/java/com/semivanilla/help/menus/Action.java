@@ -1,6 +1,7 @@
 package com.semivanilla.help.menus;
 
 import com.google.gson.*;
+import com.semivanilla.help.HelpPlugin;
 import com.semivanilla.help.manager.BookManager;
 import com.semivanilla.help.manager.ConfigManager;
 import net.kyori.adventure.inventory.Book;
@@ -39,6 +40,8 @@ public abstract class Action {
                 player.closeInventory();
                 // player.openBook(book);
                 BookManager.giveBook(book, player);
+                Component component = BookManager.getMiniMessage().deserialize(HelpPlugin.getInstance().getConfig().getString("messages.book-given", "<green>Added a book to your inventory!"));
+                player.sendMessage(component);
                 return false;
             } catch (Exception e) {
                 player.sendMessage(ChatColor.RED + "Could not give book \"" + this.book + "\"!");
@@ -60,6 +63,7 @@ public abstract class Action {
             for (Component message : messages) {
                 player.sendMessage(message);
             }
+            player.closeInventory();
             return true;
         }
     }
