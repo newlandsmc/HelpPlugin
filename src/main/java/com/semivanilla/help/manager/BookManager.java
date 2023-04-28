@@ -72,7 +72,7 @@ public class BookManager {
     public static Book createBook(String name, String title) {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
-        meta.setTitle(title);
+        meta = meta.title(miniMessage.deserialize(title));
         meta.setAuthor(ConfigManager.getBookAuthor());
         List<List<String>> list;
         try {
