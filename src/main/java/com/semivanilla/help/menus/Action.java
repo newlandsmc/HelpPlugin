@@ -58,13 +58,13 @@ public abstract class Action {
             List<Component> messages = ConfigManager.getComponentsByName(key);
             if (messages == null) {
                 player.sendMessage(ChatColor.RED + "Could not find message \"" + key + "\"!");
-                return true;
+                return false;
             }
             for (Component message : messages) {
                 player.sendMessage(message);
             }
             player.closeInventory();
-            return true;
+            return false;
         }
     }
 
