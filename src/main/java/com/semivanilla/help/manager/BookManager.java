@@ -1,5 +1,6 @@
 package com.semivanilla.help.manager;
 
+import com.semivanilla.help.HelpPlugin;
 import com.semivanilla.help.manager.ConfigManager;
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -34,7 +35,7 @@ public class BookManager {
      */
 
     public static void init() {
-        help = createBook("Help");
+        help = createBook("Help", HelpPlugin.getInstance().getConfig().getString("book-name", "Help Book"));
         /*
         store = createBook("Store");
         map = createBook("Map");
@@ -68,10 +69,10 @@ public class BookManager {
         }
     }
 
-    public static Book createBook(String name) {
+    public static Book createBook(String name, String title) {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
-        meta.setTitle("Help " + name);
+        meta.setTitle(title);
         meta.setAuthor(ConfigManager.getBookAuthor());
         List<List<String>> list;
         try {

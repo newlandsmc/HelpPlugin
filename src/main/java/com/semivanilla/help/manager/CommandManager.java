@@ -7,6 +7,7 @@ import lombok.SneakyThrows;
 import net.badbird5907.blib.command.BukkitCommand;
 import net.badbird5907.blib.util.CC;
 import net.kyori.adventure.inventory.Book;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,8 +18,10 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.SimplePluginManager;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.util.List;
 
 public class CommandManager implements CommandExecutor {
     private CommandMap map;
@@ -52,6 +55,7 @@ public class CommandManager implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (!label.isEmpty()) {
+                /*
                 if (ConfigManager.getCommandBookMap().containsKey(label)) {
                     player.closeInventory();
                     Book book = BookManager.getBookByName(ConfigManager.getCommandBookMap().get(label));
@@ -63,11 +67,19 @@ public class CommandManager implements CommandExecutor {
                     player.openBook(book);
                     return true;
                 }
+                 */
+                String key = ConfigManager.getCommandBookMap().get(label);
+                List<Component> componentList = ConfigManager.getComponentsByName(key);
+                if (componentList != null) {
+                    for (Component component : componentList) {
+                        player.sendMessage(component);
+                    }
+                    return true;
+                }
             }
-            if (args.length == 0) {
-                Menus.MAIN.open(player);
-                return true;
-            }
+            Menus.MAIN.open(player);
+
+            /*
             String action = args[0].toLowerCase();
             switch (action) {
                 case "help": {
@@ -76,7 +88,6 @@ public class CommandManager implements CommandExecutor {
                     BookManager.giveBook(BookManager.getHelp(), player);
                     return true;
                 }
-                /*
                 case "store": {
                     player.closeInventory();
                     player.openBook(BookManager.getStore());
@@ -107,13 +118,13 @@ public class CommandManager implements CommandExecutor {
                     player.openBook(BookManager.getRules());
                     return true;
                 }
-                 */
                 default: {
                     player.closeInventory();
                     MenuManager.getInstance().open(Menus.MAIN, player);
                     return true;
                 }
             }
+                 */
         }
         return true;
     }

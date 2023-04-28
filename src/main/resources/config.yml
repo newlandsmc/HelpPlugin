@@ -26,6 +26,7 @@ messages:
 
 menu-name: 'Help Menu' # name of the help menu
 book-author: 'SemiVanilla' # author of the books
+book-name: 'Help Book'
 
 links:
   store: 'https://store.semivanilla.com/'
