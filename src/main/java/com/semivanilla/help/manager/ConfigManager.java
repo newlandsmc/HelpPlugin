@@ -147,6 +147,7 @@ public class ConfigManager {
         return a;
     }
     public static List<Component> getComponentsByName(String name) {
+        if (name == null) return null;
         switch (name.toLowerCase()) {
             case "store":
                 return store;
